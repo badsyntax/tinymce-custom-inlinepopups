@@ -3,7 +3,7 @@
  * @description : jQuery UI Inline Popups plugin to replace the default inlinepopups
  * @developer : badsyntax (Richard Willis)
  * @contact : http://badsyntax.co
- * @moreinfo : see this blog post for instructions: http://is.gd/j1FuI
+ * @moreinfo : http://is.gd/j1FuI
  */
 
 (function() {
