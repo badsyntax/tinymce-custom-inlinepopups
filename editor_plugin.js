@@ -1,5 +1,9 @@
 /**
- * editor_plugin.js
+ * @filename : editor_plugin.js
+ * @description : jQuery UI Inline Popups plugin to replace the default inlinepopups
+ * @developer : badsyntax (Richard Willis)
+ * @contact : http://badsyntax.co
+ * @moreinfo : see this blog post for instructions: http://is.gd/j1FuI
  */
 
 (function() {
@@ -128,8 +132,8 @@
 						frameborder: 0 
 					})
 					.css({ 
-							width: f.width,
-							height: f.height
+						width: f.width,
+						height: f.height
 					})
 					.appendTo(dialog)
 					.attr( 'src', f.url || f.file );
@@ -166,8 +170,8 @@
 				var ifr = DOM.get(wo.id + '_ifr');
 
 				if (ifr && w == ifr.contentWindow) {
-						w = wo.id;
-						return false;
+					w = wo.id;
+					return false;
 				}
 			});
 
@@ -220,7 +224,7 @@
 			w = this._findId(w);
 
 			if (e = DOM.get('ui-dialog-title-dialog-' + w))
-					e.innerHTML = DOM.encode(ti);
+				e.innerHTML = DOM.encode(ti);
 		},
 
 		alert : function(txt, cb, s) {
@@ -230,10 +234,10 @@
 				title : 'Error',
 				type : 'alert',
 				button_func : function(s) {
-						if (cb)
-								cb.call(s || t, s);
+					if (cb)
+						cb.call(s || t, s);
 
-						t.close(null, w.id);
+					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
 				inline : 1,
@@ -249,10 +253,10 @@
 				title: 'Please confirm',
 				type : 'confirm',
 				button_func : function(s) {
-						if (cb)
-								cb.call(s || t, s);
+					if (cb)
+						cb.call(s || t, s);
 
-						t.close(null, w.id);
+					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
 				inline : 1,
