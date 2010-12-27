@@ -118,7 +118,7 @@
 					];										
 				}
 			
-				var content = $('')
+				var content = $('<div />')
 					.addClass('ui-dialog-tinymce-content')
 					.html(f.content);
 			
