@@ -30,8 +30,8 @@
 			return {
 				longname : 'jQueryInlinePopups',
 				author : 'Richard Willis',
-				authorurl : 'http://badsyntax.count',
-				infourl : '',
+				authorurl : 'http://badsyntax.co',
+				infourl : 'http://blog.badsyntax.co/post/2365205144/tinymce-jquery-ui-inline-popups',
 				version : '0.1a'
 			};
 		}
