@@ -108,12 +108,12 @@
 						{
 							text: "Ok",
 							click: buttonAction,
-							class: 'mceOk'
+							'class': 'mceOk'
 						},
 						{
 							text: "Cancel",
 							click: buttonAction,
-							class: 'mceCancel'
+							'class': 'mceCancel'
 						}
 					];										
 				}
