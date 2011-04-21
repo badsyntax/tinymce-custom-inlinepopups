@@ -7,7 +7,7 @@
  */
 
 (function() {
-		
+
 	var DOM = tinymce.DOM, 
 		Element = tinymce.dom.Element, 
 		Event = tinymce.dom.Event, 
@@ -81,9 +81,10 @@
 					element: dialog
 				};
 						
-			if (f.title) 
-					dialog.attr('title', f.title);
-				
+			if (f.title) {
+				dialog.attr('title', f.title);
+			}
+
 			if (f.content){
 		
 				if (f.type == 'confirm'){
@@ -126,7 +127,6 @@
 			}
 			else 
 			{
-				
 				var iframe = $('<iframe />', { 
 						id: id + '_ifr',
 						frameborder: 0 
@@ -135,12 +135,11 @@
 						width: f.width,
 						height: f.height
 					})
-					.appendTo(dialog)
-					.attr( 'src', f.url || f.file );
+					.appendTo(dialog);
 	
 				w.iframeElement = iframe[0];			
 			}
-				
+
 			p.mce_inline = true;
 			p.mce_window_id = id;
 			p.mce_auto_focus = f.auto_focus;
@@ -150,6 +149,10 @@
 			this.onOpen.dispatch(this, f, p);
 
 			dialog.dialog(config);
+			
+			if (!f.content) {
+				iframe.attr( 'src', f.url || f.file );
+			}
 
 			// Add window
 			t.windows[id] = w;
