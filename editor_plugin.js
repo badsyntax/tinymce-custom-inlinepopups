@@ -20,8 +20,7 @@
 		init : function(ed, url) {
 
 			// Replace window manager
-			ed.onBeforeRenderUI.add(function() {
-				
+			ed.onBeforeRenderUI.add(function() {				
 				ed.windowManager = new tinymce.InlineWindowManager(ed);
 			});
 		},
@@ -32,7 +31,7 @@
 				author : 'Richard Willis',
 				authorurl : 'http://badsyntax.co',
 				infourl : 'http://blog.badsyntax.co/post/2365205144/tinymce-jquery-ui-inline-popups',
-				version : '0.1a'
+				version : '0.1b'
 			};
 		}
 	});
@@ -41,13 +40,9 @@
 	tinymce.create('tinymce.InlineWindowManager:tinymce.WindowManager', {
 			
 		InlineWindowManager : function(ed) {
-			
-			var t = this;
-
-			t.parent(ed);
-			t.zIndex = 300000;
-			t.count = 0;
-			t.windows = {};
+			this.parent(ed);
+			this.count = 0;
+			this.windows = {};
 		},
 
 		open : function(f, p) {
@@ -56,8 +51,9 @@
 			p = p || {};
 
 			// Run native windows
-			if (!f.inline)
+			if (!f.inline) {
 				return t.parent(f, p);
+			}
 				
 			var 
 				config = {
@@ -105,18 +101,15 @@
 						return false;					
 					}
 				
-					config.buttons = [
-						{
-							text: "Ok",
-							click: buttonAction,
-							'class': 'mceOk'
-						},
-						{
-							text: "Cancel",
-							click: buttonAction,
-							'class': 'mceCancel'
-						}
-					];										
+					config.buttons = [{
+						'text': 'Ok',
+						'click': buttonAction,
+						'class': 'mceOk'
+					}, {
+						'text': "Cancel",
+						'click': buttonAction,
+						'class': 'mceCancel'
+					}];										
 				}
 			
 				var content = $('<div />')
@@ -150,6 +143,7 @@
 
 			dialog.dialog(config);
 			
+			// Load in iframe src
 			if (!f.content) {
 				iframe.attr( 'src', f.url || f.file );
 			}
@@ -166,8 +160,9 @@
 	
 			var t = this;
 
-			if (typeof(w) == 'string')
+			if (typeof(w) == 'string') {
 				return w;
+			}
 
 			each(t.windows, function(wo) {
 				var ifr = DOM.get(wo.id + '_ifr');
@@ -182,13 +177,11 @@
 		},
 
 		resizeBy : function(dw, dh, id) {
-
-				return;
+			return;
 		},
 
-		focus : function(id) {
-	
-				return; 
+		focus : function(id) {	
+			return; 
 		},
 
 		close : function(win, id) {
@@ -237,9 +230,9 @@
 				title : 'Error',
 				type : 'alert',
 				button_func : function(s) {
-					if (cb)
+					if (cb) {
 						cb.call(s || t, s);
-
+					}
 					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
@@ -256,9 +249,9 @@
 				title: 'Please confirm',
 				type : 'confirm',
 				button_func : function(s) {
-					if (cb)
+					if (cb) {
 						cb.call(s || t, s);
-
+					}
 					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
