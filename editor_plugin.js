@@ -27,10 +27,10 @@
 
 		getInfo : function() {
 			return {
-				longname : 'jQueryInlinePopups',
+				longname : 'jQueryUIInlinePopups',
 				author : 'Richard Willis',
 				authorurl : 'http://badsyntax.co',
-				infourl : 'http://blog.badsyntax.co/post/2365205144/tinymce-jquery-ui-inline-popups',
+				infourl : 'http://is.gd/j1FuI',
 				version : '0.1b'
 			};
 		}
@@ -56,6 +56,8 @@
 			}
 				
 			var 
+				t = this,
+				// Dialog config
 				config = {
 					title: f.title || '',
 					width: f.width + 1,
@@ -65,70 +67,64 @@
 					draggable: true,
 					dialogClass: 'ui-dialog-tinymce'
 				},
-				t = this,
 				id = DOM.uniqueId(),
+				// jQuery Dialog element
 				dialog = $('<div />')
 					.attr('id', 'dialog-' + id)
 					.hide()
 					.appendTo('body'),
+				// Window info
 				w = {
 					id : id,
 					features : f,
 					element: dialog
 				};
-						
+
 			if (f.title) {
 				dialog.attr('title', f.title);
 			}
 
+			// Inline content
 			if (f.content){
-		
 				if (f.type == 'confirm'){
-
-					function buttonAction(e){
-
-						if (/mceClose/.test(e.target.className)) {
-
-							t.close(null, id);
-
-						} else if (/mceOk/.test(e.target.className) || /mceCancel/.test(e.target.className)) {
-
-							f.button_func(/mceOk/.test(e.target.className));
-						}
-					
-						Event.cancel(e);		
-
-						return false;					
-					}
-				
 					config.buttons = [{
 						'text': 'Ok',
-						'click': buttonAction,
-						'class': 'mceOk'
+						'click': function(e){
+							f.button_func(true);
+						}
 					}, {
-						'text': "Cancel",
-						'click': buttonAction,
-						'class': 'mceCancel'
+						'text': 'Cancel',
+						'click': function(e){
+							f.button_func(false);
+						}
 					}];										
 				}
+				else if (f.type == 'alert'){
+					config.buttons = [{
+						'text': 'Ok',
+						'click': function(e){
+							f.button_func(true);
+						}
+					}];
+				}
 			
-				var content = $('<div />')
-					.addClass('ui-dialog-tinymce-content')
-					.html(f.content);
-			
-				dialog.html(content);
+				dialog.html($('<div />', {
+					'class': 'ui-dialog-tinymce-content',
+					'html': f.content
+				}));
 			}
+			// iFramed document
 			else 
 			{
 				var iframe = $('<iframe />', { 
-						id: id + '_ifr',
-						frameborder: 0 
-					})
-					.css({ 
-						width: f.width,
-						height: f.height
-					})
-					.appendTo(dialog);
+					id: id + '_ifr',
+					frameborder: 0 
+				})
+				.css({ 
+					width: f.width,
+					height: f.height
+				})
+				.appendTo(dialog);
 	
 				w.iframeElement = iframe[0];			
 			}
@@ -219,39 +215,26 @@
 
 			w = this._findId(w);
 
-			if (e = DOM.get('ui-dialog-title-dialog-' + w))
+			if (e = DOM.get('ui-dialog-title-dialog-' + w)) {
 				e.innerHTML = DOM.encode(ti);
+			}
 		},
 
 		alert : function(txt, cb, s) {
-			var t = this, w;
-
-			w = t.open({
-				title : 'Error',
-				type : 'alert',
-				button_func : function(s) {
-					if (cb) {
-						cb.call(s || t, s);
-					}
-					t.close(null, w.id);
-				},
-				content : DOM.encode(t.editor.getLang(txt, txt)),
-				inline : 1,
-				width : 400,
-				height : 130
-			});
+			this._messagePopup('alert', txt || 'Error', cb, s);
 		},
 
 		confirm : function(txt, cb, s) {
+			this._messagePopup('confirm', txt || 'Please confirm', cb, s);
+		},
+		
+		_messagePopup : function(type, txt, cb, s) {
 			var t = this, w;
-
 			w = t.open({
-				title: 'Please confirm',
-				type : 'confirm',
+				title : txt,
+				type : type,
 				button_func : function(s) {
-					if (cb) {
-						cb.call(s || t, s);
-					}
+					(cb) && cb.call(s || t, s);
 					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
