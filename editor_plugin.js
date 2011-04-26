@@ -125,8 +125,6 @@
 					height: f.height
 				})
 				.appendTo(dialog);
-	
-				w.iframeElement = iframe[0];			
 			}
 
 			p.mce_inline = true;
@@ -221,17 +219,17 @@
 		},
 
 		alert : function(txt, cb, s) {
-			this._messagePopup('alert', txt || 'Error', cb, s);
+			this._messagePopup('alert', 'Alert', txt, cb, s);
 		},
 
 		confirm : function(txt, cb, s) {
-			this._messagePopup('confirm', txt || 'Please confirm', cb, s);
+			this._messagePopup('confirm', 'Confirm', txt, cb, s);
 		},
 		
-		_messagePopup : function(type, txt, cb, s) {
+		_messagePopup : function(type, title, txt, cb, s) {
 			var t = this, w;
 			w = t.open({
-				title : txt,
+				title : title,
 				type : type,
 				button_func : function(s) {
 					(cb) && cb.call(s || t, s);
