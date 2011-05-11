@@ -84,6 +84,7 @@
 
 			// Inline content
 			if (f.content){
+
 				if (f.type == 'confirm'){
 					config.buttons = [{
 						'text': 'Ok',
@@ -105,6 +106,8 @@
 						}
 					}];
 				}
+
+				config.width = f.width;
 			
 				dialog.html($('<div />', {
 					'class': 'ui-dialog-tinymce-content',
