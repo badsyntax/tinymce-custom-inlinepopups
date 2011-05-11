@@ -60,8 +60,8 @@
 				// Dialog config
 				config = {
 					title: f.title || '',
-					width: f.width + 1,
-					height: f.height + 25,
+					width: 'auto',
+					height: 'auto',
 					modal: true,
 					resizable: false,
 					draggable: true,
