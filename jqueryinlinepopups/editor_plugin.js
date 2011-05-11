@@ -9,10 +9,8 @@
 (function() {
 
 	var DOM = tinymce.DOM, 
-		Element = tinymce.dom.Element, 
 		Event = tinymce.dom.Event, 
-		each = tinymce.each, 
-		is = tinymce.is;
+		each = tinymce.each;
 
 	// Create the editor plugin
 	tinymce.create('tinymce.plugins.jQueryInlinePopups', {
