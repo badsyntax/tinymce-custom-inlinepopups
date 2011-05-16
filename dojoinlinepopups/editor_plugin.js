@@ -26,11 +26,11 @@
 
 		getInfo : function() {
 			return {
-				longname : 'jQuery UI Inline Popups',
+				longname : 'Dojo Inline Popups',
 				author : 'Richard Willis',
 				authorurl : 'http://badsyntax.co',
-				infourl : 'http://is.gd/j1FuI',
-				version : '0.1b'
+				infourl : 'https://github.com/badsyntax/tinymce-custom-inlinepopups',
+				version : '0.1a'
 			};
 		}
 	});
