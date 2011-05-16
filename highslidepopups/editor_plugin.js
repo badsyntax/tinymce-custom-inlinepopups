@@ -1,10 +1,14 @@
 /**
  * @filename : editor_plugin.js
- * @description : Highslide Inline Popups plugin to replace the default inlinepopups
+ * @description : Highslide Inline Popups plugin to replace the default inlinepopups (PROOF OF CONCEPT)
  * @developer : badsyntax (Richard Willis)
  * @contact : http://badsyntax.co
  * @demo : http://demos.badsyntax.co/tinymce-highslide-popups/
  */
+
+/* PLEASE NOTE
+- this is just a proof of concept, this does not work in IE
+*/
 
 (function() {
 
