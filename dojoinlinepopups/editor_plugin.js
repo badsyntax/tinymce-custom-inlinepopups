@@ -4,6 +4,7 @@
  * @developer : badsyntax (Richard Willis)
  * @contact : http://badsyntax.co
  * @demo : http://demos.badsyntax.co/tinymce-dojo-popups/
+ * @project: https://github.com/badsyntax/tinymce-custom-inlinepopups
  */
 
 (function() {
