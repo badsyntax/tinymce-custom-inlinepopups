@@ -25,7 +25,7 @@
 
 		getInfo : function() {
 			return {
-				longname : 'jQueryUIInlinePopups',
+				longname : 'jQuery UI Inline Popups',
 				author : 'Richard Willis',
 				authorurl : 'http://badsyntax.co',
 				infourl : 'http://is.gd/j1FuI',
@@ -55,6 +55,8 @@
 				
 			var 
 				t = this,
+				id = DOM.uniqueId(),
+
 				// Dialog config
 				config = {
 					title: f.title || '',
@@ -65,22 +67,19 @@
 					draggable: true,
 					dialogClass: 'ui-dialog-tinymce'
 				},
-				id = DOM.uniqueId(),
-				// jQuery Dialog element
+
+				// Dialog element
 				dialog = $('<div />')
 					.attr('id', 'dialog-' + id)
 					.hide()
 					.appendTo('body'),
+
 				// Window info
 				w = {
 					id : id,
 					features : f,
 					element: dialog
 				};
-
-			if (f.title) {
-				dialog.attr('title', f.title);
-			}
 
 			// Inline content
 			if (f.content){
