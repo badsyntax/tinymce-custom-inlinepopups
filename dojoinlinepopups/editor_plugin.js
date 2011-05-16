@@ -179,7 +179,9 @@
 
 				DOM.setAttrib(id + '_ifr', 'src', 'javascript:""'); // Prevent leak
 	
-				w.element.hide();
+				w.element.hide(); // will hide the overlay
+
+				w.element.domNode.parentNode.removeChild(w.element.domNode);
 	
 				delete t.windows[id];
 			}
