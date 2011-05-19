@@ -81,6 +81,13 @@
 					element: dialog
 				};
 
+			// Only store selection if the type is a normal window.
+			// This is required at least for IE to remeber the position
+			// before the focus from editor is lost.
+			if (!f.type) {
+				this.bookmark = this.editor.selection.getBookmark(1);
+			}
+
 			// Inline content
 			if (f.content){
 
