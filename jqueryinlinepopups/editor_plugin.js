@@ -64,7 +64,9 @@
 					modal: true,
 					resizable: false,
 					draggable: true,
-					dialogClass: 'ui-dialog-tinymce'
+					dialogClass: 'ui-dialog-tinymce',
+					// match the tinymce inlinepopups starting z-index (fixes #3)
+                                        zIndex: 300000
 				},
 
 				// Dialog element
