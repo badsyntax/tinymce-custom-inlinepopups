@@ -39,7 +39,6 @@
 			
 		InlineWindowManager : function(ed) {
 			this.parent(ed);
-			this.count = 0;
 			this.windows = {};
 		},
 
@@ -152,44 +151,16 @@
 			// Add window
 			t.windows[id] = w;
 
-			t.count++;
-
 			return w;
 		},
 
-		_findId : function(w) {
-	
-			var t = this;
+		resizeBy : function(dw, dh, id) { return; },
 
-			if (typeof(w) == 'string') {
-				return w;
-			}
-
-			each(t.windows, function(wo) {
-				var ifr = DOM.get(wo.id + '_ifr');
-
-				if (ifr && w == ifr.contentWindow) {
-					w = wo.id;
-					return false;
-				}
-			});
-
-			return w;
-		},
-
-		resizeBy : function(dw, dh, id) {
-			return;
-		},
-
-		focus : function(id) {	
-			return; 
-		},
+		focus : function(id) { return; },
 
 		close : function(win, id) {
 	
-			var t = this, w, d = DOM.doc, ix = 0, fw, id;
-
-			id = t._findId(id || win);
+			var t = this, w, id = id || win.frameElement.id.replace(/_ifr$/, '');
 
 			// Probably not inline
 			if (!t.windows[id]) {
@@ -197,32 +168,15 @@
 				return;
 			}
 
-			t.count--;
-
 			if (w = t.windows[id]) {
-		
-				t.onClose.dispatch(t);
-	
-				Event.clear(id);
-				Event.clear(id + '_ifr');
-
-				DOM.setAttrib(id + '_ifr', 'src', 'javascript:""'); // Prevent leak
-	
 				w.element.dialog('destroy').remove();
-	
 				delete t.windows[id];
 			}
 		},
 
 		setTitle : function(w, ti) {
-	
-			var e;
-
-			w = this._findId(w);
-
-			if (e = DOM.get('ui-dialog-title-dialog-' + w)) {
-				e.innerHTML = DOM.encode(ti);
-			}
+			var id = w.frameElement.id.replace(/_ifr$/, '');
+			$('#ui-dialog-title-dialog-' + id).html(ti);
 		},
 
 		alert : function(txt, cb, s) {
