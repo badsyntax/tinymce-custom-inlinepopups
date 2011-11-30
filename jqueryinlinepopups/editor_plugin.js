@@ -59,7 +59,7 @@
 				// Dialog config
 				config = {
 					title: f.title || '',
-					width: 'auto',
+					width: f.width,
 					height: 'auto',
 					modal: true,
 					resizable: false,
@@ -114,8 +114,6 @@
 					}];
 				}
 
-				config.width = f.width;
-			
 				dialog.html($('<div />', {
 					'class': 'ui-dialog-tinymce-content',
 					'html': f.content
