@@ -128,7 +128,7 @@
 				})
 				.css({ 
 					width: f.width,
-					height: f.height
+					height: f.height + 5 // Fix vertical scrolling in IE7
 				})
 				.appendTo(dialog);
 			}
@@ -136,13 +136,24 @@
 			p.mce_inline = true;
 			p.mce_window_id = id;
 			p.mce_auto_focus = f.auto_focus;
-					
+
 			this.features = f;
 			this.params = p;
 			this.onOpen.dispatch(this, f, p);
 
-			dialog.dialog(config);
-			
+			dialog
+				.dialog(config)
+				// Adjust for horizontal padding and border
+				.dialog('option', 'width', 
+					f.width + 
+					(parseInt(dialog.css('paddingLeft')) || 0) + 
+					(parseInt(dialog.css('paddingRight')) || 0) +
+					(parseInt(dialog.css('borderLeftWidth')) || 0) + 
+					(parseInt(dialog.css('borderRightWidth')) || 0)
+				)
+				// Reposition after resize
+				.dialog('option', 'position', dialog.dialog('option', 'position'));
+
 			// Load in iframe src
 			if (!f.content) {
 				iframe.attr( 'src', f.url || f.file );
