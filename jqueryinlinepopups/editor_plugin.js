@@ -59,7 +59,7 @@
 				// Dialog config
 				config = {
 					title: f.title || '',
-					width: f.width,
+					width: 'auto',
 					height: 'auto',
 					modal: true,
 					resizable: false,
@@ -128,8 +128,9 @@
 				})
 				.css({ 
 					width: f.width,
-					height: f.height
+					height: f.height + 5
 				})
+				.attr('scrollbars', 'no')
 				.appendTo(dialog);
 			}
 
@@ -141,7 +142,10 @@
 			this.params = p;
 			this.onOpen.dispatch(this, f, p);
 
-			dialog.dialog(config);
+			dialog
+			.dialog(config)
+			.dialog('option', 'width', dialog.innerWidth())
+			.dialog('option', 'position', dialog.dialog('option', 'position'));
 			
 			// Load in iframe src
 			if (!f.content) {
