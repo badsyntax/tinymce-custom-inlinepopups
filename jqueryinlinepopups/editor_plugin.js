@@ -173,6 +173,7 @@
 			}
 
 			if (w = t.windows[id]) {
+				$('#' + id + '_ifr').prop('src', 'javascript:""');
 				w.element.dialog('destroy').remove();
 				delete t.windows[id];
 			}
