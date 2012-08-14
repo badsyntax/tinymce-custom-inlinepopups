@@ -173,6 +173,9 @@
 			}
 
 			if (w = t.windows[id]) {
+				if (win && win.frameElement) {
+					win.frameElement.src = 'javascript:""';
+				}
 				w.element.dialog('destroy').remove();
 				delete t.windows[id];
 			}
