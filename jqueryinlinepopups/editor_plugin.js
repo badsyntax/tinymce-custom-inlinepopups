@@ -173,7 +173,9 @@
 			}
 
 			if (w = t.windows[id]) {
-				$('#' + id + '_ifr').prop('src', 'javascript:""');
+				if (win && win.frameElement) {
+					win.frameElement.src = 'javascript:""';
+				}
 				w.element.dialog('destroy').remove();
 				delete t.windows[id];
 			}
