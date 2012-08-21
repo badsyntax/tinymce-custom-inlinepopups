@@ -1,10 +1,6 @@
-/**
- * @filename : editor_plugin.js
- * @description : jQuery UI Inline Popups plugin to replace the default inlinepopups
- * @developer : badsyntax (Richard Willis)
- * @contact : http://badsyntax.co
- * @moreinfo : http://is.gd/j1FuI
- */
+/*! tinymce-jqueryui-inline-popups - v0.1.0 - 2012-08-21
+* https://github.com/badsyntax/tinymce-custom-inlinepopups
+* Copyright (c) 2012 Richard Willis; Licensed MIT */
 
 (function() {
 
@@ -49,12 +45,13 @@
 
 			// Run native windows
 			if (!f.inline) {
-				return t.parent(f, p);
+				return this.parent(f, p);
 			}
 				
 			var 
 				t = this,
 				id = DOM.uniqueId(),
+				iframe,
 
 				// Dialog config
 				config = {
@@ -92,7 +89,7 @@
 			// Inline content
 			if (f.content){
 
-				if (f.type == 'confirm'){
+				if (f.type === 'confirm'){
 					config.buttons = [{
 						'text': 'Ok',
 						'click': function(e){
@@ -105,7 +102,7 @@
 						}
 					}];										
 				}
-				else if (f.type == 'alert'){
+				else if (f.type === 'alert'){
 					config.buttons = [{
 						'text': 'Ok',
 						'click': function(e){
@@ -122,7 +119,7 @@
 			// iFramed document
 			else 
 			{
-				var iframe = $('<iframe />', { 
+				iframe = $('<iframe />', { 
 					id: id + '_ifr',
 					frameborder: 0 
 				})
@@ -164,7 +161,9 @@
 
 		close : function(win, id) {
 	
-			var t = this, w, id = id || win.frameElement.id.replace(/_ifr$/, '');
+			var t = this, w;
+
+			id = id || win.frameElement.id.replace(/_ifr$/, '');
 
 			// Probably not inline
 			if (!t.windows[id]) {
@@ -200,7 +199,9 @@
 				title : title,
 				type : type,
 				button_func : function(s) {
-					(cb) && cb.call(s || t, s);
+					if (cb) {
+						cb.call(s || t, s);
+					}
 					t.close(null, w.id);
 				},
 				content : DOM.encode(t.editor.getLang(txt, txt)),
@@ -213,4 +214,4 @@
 
 	// Register plugin
 	tinymce.PluginManager.add('jqueryinlinepopups', tinymce.plugins.jQueryInlinePopups);
-})();
+}());
