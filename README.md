@@ -1,6 +1,6 @@
 # tinymce-jqueryui-inline-popups
 
-TinyMCE jQuery UI inline popups
+TinyMCE 3 jQuery UI inline popups
 
 ## Getting Started
 * Create a new folder called ‘jqueryinlinepopups’ in the tinymce plugins directory.
